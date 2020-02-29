@@ -1,8 +1,5 @@
 # FriendSystem-Nukkit
-Download: Available soon
-
-# Wiki Page
-Wiki: Available soon
+Download: https://nukkitx.com/resources/friendsystem.398/
 
 # Thanks to ZAP-Hosting!
 This project wouldn't be possible without the help of ZAP-Hosting!
