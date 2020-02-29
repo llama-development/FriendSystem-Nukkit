@@ -1,8 +1,8 @@
-# BanSystem-Nukkit
-Download: https://nukkitx.com/resources/bansystem.332/
+# FriendSystem-Nukkit
+Download: Available soon
 
 # Wiki Page
-Wiki: https://github.com/llama-development/BanSystem-Nukkit/wiki
+Wiki: Available soon
 
 # Thanks to ZAP-Hosting!
 This project wouldn't be possible without the help of ZAP-Hosting!
