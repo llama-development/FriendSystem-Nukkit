@@ -12,6 +12,7 @@ public class FriendSystem extends PluginBase {
 
     private static FriendSystem instance;
     private boolean mysql, mongodb, yaml = false;
+    private int version = 1;
 
     @Override
     public void onEnable() {
@@ -49,6 +50,19 @@ public class FriendSystem extends PluginBase {
             getLogger().info("§aPlugin successfully started.");
         } else {
             getLogger().warning("§4§lFailed to load! Please specify a valid provider: MySql, MongoDB, Yaml");
+        }
+        updateConfig(getConfig());
+    }
+
+    private void updateConfig(Config config) {
+        if (!config.exists("ConfigVersion")) {
+            config.set("ConfigVersion", 1);
+            config.set("Messages.NotOnline", "&cThis player is not online.");
+            config.set("Messages.MsgReceived", "&8[&a[0]&8] &e-> &8[&aMe&8] &8: &7[1]");
+            config.set("Messages.MsgSent", "&8[&aMe&8] &e-> &8[&a[0]&8] &8: &7[1]");
+            config.set("HelpFormat.Msg", "&e/friend msg <Player> <Message> &8- &7Send a private message to a friend.");
+            config.save();
+            config.reload();
         }
     }
 

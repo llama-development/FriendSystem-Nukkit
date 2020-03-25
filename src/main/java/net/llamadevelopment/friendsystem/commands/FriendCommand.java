@@ -83,6 +83,18 @@ public class FriendCommand extends CommandManager {
                 } else if (args[0].equalsIgnoreCase("togglerequests")) {
                     FriendManager.toggleRequests(player);
                 } else sendHelp(player);
+            } else if (args.length >= 3) {
+                if (args[0].equalsIgnoreCase("msg")) {
+                    Player friend = plugin.getServer().getPlayer(args[1]);
+                    String message = "";
+                    for (int i = 2; i < args.length; ++i) message = message + args[i] + " ";
+                    if (friend != null) {
+                        if (FriendManager.areFriends(player.getName(), friend.getName())) {
+                            friend.sendMessage(Messages.getAndReplace("Messages.MsgReceived", player.getName(), message));
+                            player.sendMessage(Messages.getAndReplace("Messages.MsgSent", friend.getName(), message));
+                        } else player.sendMessage(Messages.getAndReplace("Messages.NotOnFriendList", friend.getName()));
+                    } else player.sendMessage(Messages.getAndReplace("Messages.NotOnline"));
+                } else sendHelp(player);
             } else sendHelp(player);
         }
         return false;
@@ -97,6 +109,7 @@ public class FriendCommand extends CommandManager {
         player.sendMessage(Messages.getAndReplace("HelpFormat.Deny"));
         player.sendMessage(Messages.getAndReplace("HelpFormat.List"));
         player.sendMessage(Messages.getAndReplace("HelpFormat.Requests"));
+        player.sendMessage(Messages.getAndReplace("HelpFormat.Msg"));
         player.sendMessage(Messages.getAndReplace("HelpFormat.Togglenotify"));
         player.sendMessage(Messages.getAndReplace("HelpFormat.Togglerequests"));
         player.sendMessage(Messages.getAndReplace("HelpFormat.Footer"));

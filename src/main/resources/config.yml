@@ -39,6 +39,9 @@ Messages:
   RequestFalse: "&cYou will now receive no more requests."
   NotificationTrue: "&aYou will now receive notifications."
   NotificationFalse: "&cYou will no longer receive any notifications."
+  NotOnline: "&cThis player is not online."
+  MsgReceived: "&8[&a[0]&8] &e-> &8[&aMe&8] &8: &7[1]"
+  MsgSent: "&8[&aMe&8] &e-> &8[&a[0]&8] &8: &7[1]"
 
 HelpFormat:
   Header: "&8-=-=-=- &eHelp &8-=-=-=-"
@@ -48,6 +51,7 @@ HelpFormat:
   Accept: "&e/friend accept <Player> &8- &7Accept a friend request."
   Deny: "&e/friend deny <Player> &8- &7Deny a friend request."
   List: "&e/friend list &8- &7Show a list of all your friends."
+  Msg: "&e/friend msg <Player> <Message> &8- &7Send a private message to a friend."
   Requests: "&e/friend requests &8- &7Show a list of friend requests."
   Togglenotify: "&e/friend togglenotify &8- &7Toggle receiving of online-/offline messages."
   Togglerequests: "&e/friend togglerequests &8- &7Toggle getting requests."
