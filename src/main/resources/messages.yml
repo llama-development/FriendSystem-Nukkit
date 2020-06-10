@@ -1,0 +1,69 @@
+#Standard ui icons made by Smashicons from www.flaticon.com
+# - - - System messages - - -
+
+prefix: "&8» &gFriend &8| &7"
+no-permission: "&cYou have insufficient permissions to execute this command."
+
+request-sent: "&aYou successfully sent a friend request to &e[0]&a."
+request-received: "&aYou received a friend request from &e[0]&a."
+request-already-sent: "&cYou have already sent a friend request to &e[0]&c."
+request-not-allowed: "&e[0] &cdoes not accept friend requests."
+request-accepted: "&aYou accepted &e[0]'s &afriend request."
+request-accepted-other: "&e[0] &aaccepted the friend request."
+request-denied: "&cYou denied &e[0]'s &cfriend request."
+request-denied-other: "&e[0] &cdenied the friend request."
+requests-allowed: "&aYou are now receiving friend requests."
+requests-denied: "&cYou are receiving no longer friend requests."
+notifications-allowed: "&aYou are now receiving notifications."
+notifications-denied: "&cYou are receiving no longer friend notifications."
+already-friends: "&e[0] &cis already your friend."
+user-not-found: "&e[0] &cdoes not exists."
+invalid-input: "&cYour input is invalid: Input can not be empty or contains your user name."
+friend-joined: "&e[0] &ais now online."
+friend-left: "&e[0] &cis now offline."
+friend-removed: "&e[0] &ais no longer your friend."
+friend-removed-other: "&e[0] &cis no longer your friend."
+join-info: "&7There are &e[0] &7friends online."
+online: "&aOnline"
+offline: "&cOffline"
+
+# - - - Form UI - - -
+
+back: "&8» &cBack"
+
+friend-menu-title: "Friend menu"
+friend-menu-content: ""
+friend-menu-addfriend: "&8» &aAdd friend"
+friend-menu-addfriend-image: "https://image.flaticon.com/icons/png/512/148/148764.png"
+friend-menu-requests: "&8» &eFriend requests &8[0]"
+friend-menu-requests-image: "https://image.flaticon.com/icons/png/512/148/148966.png"
+friend-menu-friendlist: "&8» &6Friend list &8[0]"
+friend-menu-friendlist-image: "https://image.flaticon.com/icons/png/512/149/149066.png"
+friend-menu-settings: "&8» &cSettings"
+friend-menu-settings-image: "https://image.flaticon.com/icons/png/512/148/148909.png"
+
+friend-add-title: "Add a friend"
+friend-add-content: "Provide the username of your friend."
+friend-add-input: "Username"
+
+friend-request-menu-title: "Your open requests"
+friend-request-menu-content: ""
+friend-request-menu-button: "&8» &e[0]"
+
+friend-request-accept-title: "Accept a request"
+friend-request-accept-content: "Do you want to accept the friend request of &e[0]&f?"
+friend-request-accept-accept: "&8» &aAccept"
+friend-request-accept-deny: "&8» &cDeny"
+
+friend-list-menu-title: "Your friends"
+friend-list-menu-content: ""
+friend-list-menu-button: "&8» &e[0]\n[1]"
+
+friend-friend-menu-title: "Friend options"
+friend-friend-menu-content: "Name: &e[0]"
+friend-friend-remove: "&8» &cRemove friend"
+friend-friend-remove-image: "https://image.flaticon.com/icons/png/512/148/148766.png"
+
+friend-settings-menu-title: "Settings"
+friend-settings-menu-request: "Toggle friend requests."
+friend-settings-menu-notification: "Toggle friend notifications."

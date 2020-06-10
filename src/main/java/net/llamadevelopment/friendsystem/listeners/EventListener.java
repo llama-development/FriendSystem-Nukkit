@@ -5,35 +5,38 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
+import cn.nukkit.level.Sound;
 import net.llamadevelopment.friendsystem.FriendSystem;
-import net.llamadevelopment.friendsystem.components.managers.FriendManager;
-import net.llamadevelopment.friendsystem.components.messaging.Messages;
-import net.llamadevelopment.friendsystem.components.utils.PlayerUtil;
+import net.llamadevelopment.friendsystem.components.api.FriendSystemAPI;
+import net.llamadevelopment.friendsystem.components.data.PlayerSettings;
+import net.llamadevelopment.friendsystem.components.language.Language;
+import net.llamadevelopment.friendsystem.components.managers.database.Provider;
 
 public class EventListener implements Listener {
 
-    private FriendSystem instance = FriendSystem.getInstance();
+    private final FriendSystem instance = FriendSystem.getInstance();
+    private final Provider provider = FriendSystemAPI.getProvider();
 
     @EventHandler
     public void on(final PlayerJoinEvent event) {
-        if (!FriendManager.userExists(event.getPlayer().getName())) FriendManager.createData(event.getPlayer().getName());
-        final PlayerUtil settings1 = FriendManager.getPlayerSettings(event.getPlayer().getName());
+        if (!provider.userExists(event.getPlayer().getName())) provider.createData(event.getPlayer().getName());
+        final PlayerSettings settings1 = provider.getFriendData(event.getPlayer().getName());
         int e = 0;
         for (Player player : instance.getServer().getOnlinePlayers().values()) {
-            PlayerUtil settings2 = FriendManager.getPlayerSettings(player.getName());
-            if (FriendManager.areFriends(event.getPlayer().getName(), player.getName())) {
+            PlayerSettings settings2 = provider.getFriendData(player.getName());
+            if (provider.areFriends(event.getPlayer().getName(), player.getName())) {
                 e++;
-                if (settings2.isNotifications()) {
-                    player.sendMessage(Messages.getAndReplace("Messages.FriendJoined", event.getPlayer().getName()));
+                if (settings2.isNotification()) {
+                    player.sendMessage(Language.getAndReplace("friend-joined", event.getPlayer().getName()));
+                    FriendSystemAPI.playSound(player, Sound.NOTE_PLING);
                 }
             }
         }
         final int finalE = e;
-        instance.getServer().getScheduler().scheduleDelayedTask(instance, new Runnable() {
-            public void run() {
-                if (settings1.isNotifications()) {
-                    event.getPlayer().sendMessage(Messages.getAndReplace("Messages.JoinNotification", String.valueOf(finalE)));
-                }
+        instance.getServer().getScheduler().scheduleDelayedTask(instance, () -> {
+            if (settings1.isNotification()) {
+                event.getPlayer().sendMessage(Language.getAndReplace("join-info", String.valueOf(finalE)));
+                FriendSystemAPI.playSound(event.getPlayer(), Sound.NOTE_PLING);
             }
         }, 40);
     }
@@ -41,10 +44,11 @@ public class EventListener implements Listener {
     @EventHandler
     public void on(PlayerQuitEvent event) {
         for (Player player : instance.getServer().getOnlinePlayers().values()) {
-            PlayerUtil settings = FriendManager.getPlayerSettings(player.getName());
-            if (FriendManager.areFriends(event.getPlayer().getName(), player.getName())) {
-                if (settings.isNotifications()) {
-                    player.sendMessage(Messages.getAndReplace("Messages.FriendLeft", event.getPlayer().getName()));
+            PlayerSettings settings = provider.getFriendData(player.getName());
+            if (provider.areFriends(event.getPlayer().getName(), player.getName())) {
+                if (settings.isNotification()) {
+                    player.sendMessage(Language.getAndReplace("friend-left", event.getPlayer().getName()));
+                    FriendSystemAPI.playSound(player, Sound.NOTE_BASS);
                 }
             }
         }
