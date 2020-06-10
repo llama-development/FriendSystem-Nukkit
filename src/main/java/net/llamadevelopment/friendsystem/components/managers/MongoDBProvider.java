@@ -51,15 +51,13 @@ public class MongoDBProvider extends Provider {
 
     @Override
     public void createData(String player) {
-        CompletableFuture.runAsync(() -> {
-            Document document = new Document("player", player)
-                    .append("uid", FriendSystemAPI.getRandomID());
-            userCollection.insertOne(document);
-            Document document1 = new Document("player", player)
-                    .append("notifications", true)
-                    .append("requests", true);
-            settingsCollection.insertOne(document1);
-        });
+        Document document = new Document("player", player)
+                .append("uid", FriendSystemAPI.getRandomID());
+        userCollection.insertOne(document);
+        Document document1 = new Document("player", player)
+                .append("notifications", true)
+                .append("requests", true);
+        settingsCollection.insertOne(document1);
     }
 
     @Override
@@ -106,18 +104,15 @@ public class MongoDBProvider extends Provider {
 
     @Override
     public void createFriendship(String player, String target) {
-        CompletableFuture.runAsync(() -> {
-            String playeruid = convertToID(player);
-            String targetuid = convertToID(target);
-            Document document = new Document("puid", playeruid)
-                    .append("tuid", targetuid);
-            friendCollection.insertOne(document);
-            Document document1 = new Document("puid", targetuid)
-                    .append("tuid", playeruid);
-            friendCollection.insertOne(document1);
-            MongoCollection<Document> collection = requestCollection;
-            collection.deleteOne(new Document("tuid", targetuid).append("puid", playeruid));
-        });
+        String playeruid = convertToID(player);
+        String targetuid = convertToID(target);
+        Document document = new Document("puid", playeruid)
+                .append("tuid", targetuid);
+        friendCollection.insertOne(document);
+        Document document1 = new Document("puid", targetuid)
+                .append("tuid", playeruid);
+        friendCollection.insertOne(document1);
+        removeFriendRequest(target, player);
     }
 
     @Override
@@ -190,8 +185,8 @@ public class MongoDBProvider extends Provider {
 
     @Override
     public PlayerSettings getFriendData(String player) {
-        boolean r = true;
-        boolean n = true;
+        boolean r;
+        boolean n;
         Document document = settingsCollection.find(new Document("player", player)).first();
         assert document != null;
         r = document.getBoolean("requests");
@@ -214,7 +209,7 @@ public class MongoDBProvider extends Provider {
         List<String> list = new ArrayList<>();
         String playeruid = convertToID(player);
         requestCollection.find().forEach((Block<? super Document>) document -> {
-            if (document.getString("puid").equals(playeruid)) list.add(convertToName(document.getString("tuid")));
+            if (document.getString("tuid").equals(playeruid)) list.add(convertToName(document.getString("puid")));
         });
         return list;
     }

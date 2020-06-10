@@ -303,10 +303,9 @@ public class MySqlProvider extends Provider {
         List<String> list = new ArrayList<>();
         String playeruid = convertToID(player);
         try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement("SELECT * FROM requests WHERE PUID = ?");
-            preparedStatement.setString(1, playeruid);
+            PreparedStatement preparedStatement = getConnection().prepareStatement("SELECT * FROM requests");
             ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) list.add(convertToName(rs.getString("TUID")));
+            while (rs.next()) if (rs.getString("TUID").equals(playeruid)) list.add(convertToName(rs.getString("PUID")));
             rs.close();
             preparedStatement.close();
         } catch (Exception e) {
