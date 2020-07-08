@@ -131,10 +131,10 @@ public class YamlProvider extends Provider {
     public void toggleRequest(Player player) {
         if (settings.getBoolean("Player." + player.getName() + ".Requests")) {
             settings.set("Player." + player.getName() + ".Requests", false);
-            player.sendMessage(Language.getAndReplace("requests-denied"));
+            player.sendMessage(Language.get("requests-denied"));
         } else {
             settings.set("Player." + player.getName() + ".Requests", true);
-            player.sendMessage(Language.getAndReplace("requests-allowed"));
+            player.sendMessage(Language.get("requests-allowed"));
         }
         settings.save();
         settings.reload();
@@ -144,10 +144,10 @@ public class YamlProvider extends Provider {
     public void toggleNotification(Player player) {
         if (settings.getBoolean("Player." + player.getName() + ".Notifications")) {
             settings.set("Player." + player.getName() + ".Notifications", false);
-            player.sendMessage(Language.getAndReplace("notifications-denied"));
+            player.sendMessage(Language.get("notifications-denied"));
         } else {
             settings.set("Player." + player.getName() + ".Notifications", true);
-            player.sendMessage(Language.getAndReplace("notifications-allowed"));
+            player.sendMessage(Language.get("notifications-allowed"));
         }
         settings.save();
         settings.reload();

@@ -27,7 +27,7 @@ public class EventListener implements Listener {
             if (provider.areFriends(event.getPlayer().getName(), player.getName())) {
                 e++;
                 if (settings2.isNotification()) {
-                    player.sendMessage(Language.getAndReplace("friend-joined", event.getPlayer().getName()));
+                    player.sendMessage(Language.get("friend-joined", event.getPlayer().getName()));
                     FriendSystemAPI.playSound(player, Sound.NOTE_PLING);
                 }
             }
@@ -35,7 +35,7 @@ public class EventListener implements Listener {
         final int finalE = e;
         instance.getServer().getScheduler().scheduleDelayedTask(instance, () -> {
             if (settings1.isNotification()) {
-                event.getPlayer().sendMessage(Language.getAndReplace("join-info", String.valueOf(finalE)));
+                event.getPlayer().sendMessage(Language.get("join-info", String.valueOf(finalE)));
                 FriendSystemAPI.playSound(event.getPlayer(), Sound.NOTE_PLING);
             }
         }, 40);
@@ -47,7 +47,7 @@ public class EventListener implements Listener {
             PlayerSettings settings = provider.getFriendData(player.getName());
             if (provider.areFriends(event.getPlayer().getName(), player.getName())) {
                 if (settings.isNotification()) {
-                    player.sendMessage(Language.getAndReplace("friend-left", event.getPlayer().getName()));
+                    player.sendMessage(Language.get("friend-left", event.getPlayer().getName()));
                     FriendSystemAPI.playSound(player, Sound.NOTE_BASS);
                 }
             }

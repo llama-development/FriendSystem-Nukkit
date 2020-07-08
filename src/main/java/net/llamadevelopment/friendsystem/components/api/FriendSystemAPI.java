@@ -3,21 +3,16 @@ package net.llamadevelopment.friendsystem.components.api;
 import cn.nukkit.Player;
 import cn.nukkit.level.Sound;
 import cn.nukkit.network.protocol.PlaySoundPacket;
+import lombok.Getter;
+import lombok.Setter;
 import net.llamadevelopment.friendsystem.components.managers.database.Provider;
 
 import java.util.Random;
 
 public class FriendSystemAPI {
 
+    @Getter @Setter
     private static Provider provider;
-
-    public static void setProvider(Provider provider) {
-        FriendSystemAPI.provider = provider;
-    }
-
-    public static Provider getProvider() {
-        return provider;
-    }
 
     public static String getRandomID() {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";

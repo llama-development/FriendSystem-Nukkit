@@ -25,23 +25,29 @@ public class FriendSystem extends PluginBase {
     @Override
     public void onEnable() {
         instance = this;
-        saveDefaultConfig();
-        registerProvider(new MongoDBProvider());
-        registerProvider(new MySqlProvider());
-        registerProvider(new YamlProvider());
-        if (!providers.containsKey(getConfig().getString("Provider"))) {
-            getLogger().error("§4Please specify a valid provider: Yaml, MySql, MongoDB");
-            return;
+        try {
+            saveDefaultConfig();
+            registerProvider(new MongoDBProvider());
+            registerProvider(new MySqlProvider());
+            registerProvider(new YamlProvider());
+            if (!providers.containsKey(getConfig().getString("Provider"))) {
+                getLogger().error("§4Please specify a valid provider: Yaml, MySql, MongoDB");
+                return;
+            }
+            provider = providers.get(getConfig().getString("Provider"));
+            provider.connect(this);
+            getLogger().info("§aSuccessfully loaded " + provider.getProvider() + " provider.");
+            FriendSystemAPI.setProvider(provider);
+            Language.init();
+            registerCommands();
+            getServer().getPluginManager().registerEvents(new EventListener(), this);
+            getServer().getPluginManager().registerEvents(new FormListener(), this);
+            getLogger().info("§aFriendSystem successfully started.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            getLogger().error("§4Failed to load BanSystem.");
         }
-        provider = providers.get(getConfig().getString("Provider"));
-        provider.connect(this);
-        getLogger().info("§aSuccessfully loaded " + provider.getProvider() + " provider.");
-        FriendSystemAPI.setProvider(provider);
-        Language.initConfiguration();
-        registerCommands();
-        getServer().getPluginManager().registerEvents(new EventListener(), this);
-        getServer().getPluginManager().registerEvents(new FormListener(), this);
-        getLogger().info("§aPlugin successfully started.");
+
     }
 
     private void registerCommands() {

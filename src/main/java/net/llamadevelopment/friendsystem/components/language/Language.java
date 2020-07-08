@@ -11,7 +11,7 @@ public class Language {
     public static HashMap<String, String> messages = new HashMap<>();
     public static String prefix;
 
-    public static void initConfiguration() {
+    public static void init() {
         messages.clear();
         FriendSystem.getInstance().saveResource("messages.yml");
         Config m = new Config(FriendSystem.getInstance().getDataFolder() + "/messages.yml");
@@ -25,32 +25,28 @@ public class Language {
         prefix = m.getString("prefix");
     }
 
-    public static String getAndReplace(String key, Object... replacements) {
-        String message = get(key);
+    public static String get(String key, Object... replacements) {
+        String message = prefix.replace("&", "§") + messages.getOrDefault(key, "null").replace("&", "§");
+
         int i = 0;
         for (Object replacement : replacements) {
             message = message.replace("[" + i + "]", String.valueOf(replacement));
             i++;
         }
+
         return message;
     }
 
-    public static String getAndReplaceNP(String key, Object... replacements) {
-        String message = getNoPrefix(key);
+    public static String getNP(String key, Object... replacements) {
+        String message = messages.getOrDefault(key, "null").replace("&", "§");
+
         int i = 0;
         for (Object replacement : replacements) {
             message = message.replace("[" + i + "]", String.valueOf(replacement));
             i++;
         }
+
         return message;
-    }
-
-    public static String get(String key) {
-        return prefix.replace("&", "§") + messages.getOrDefault(key, "null").replace("&", "§");
-    }
-
-    public static String getNoPrefix(String key) {
-        return messages.getOrDefault(key, "null").replace("&", "§");
     }
 
 }

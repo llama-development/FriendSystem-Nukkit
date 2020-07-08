@@ -17,6 +17,8 @@ import org.bson.conversions.Bson;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MongoDBProvider extends Provider {
 
@@ -35,6 +37,8 @@ public class MongoDBProvider extends Provider {
                 friendCollection = mongoDatabase.getCollection("friends");
                 settingsCollection = mongoDatabase.getCollection("settings");
                 requestCollection = mongoDatabase.getCollection("requests");
+                Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
+                mongoLogger.setLevel(Level.OFF);
                 server.getLogger().info("[MongoClient] Opened connection.");
             } catch (Exception e) {
                 server.getLogger().info("[MongoClient] Failed to connect.");
@@ -154,12 +158,12 @@ public class MongoDBProvider extends Provider {
                 Bson bson = new Document("requests", false);
                 Bson bson1 = new Document("$set", bson);
                 settingsCollection.updateOne(document, bson1);
-                player.sendMessage(Language.getAndReplace("requests-denied"));
+                player.sendMessage(Language.get("requests-denied"));
             } else {
                 Bson bson = new Document("requests", true);
                 Bson bson1 = new Document("$set", bson);
                 settingsCollection.updateOne(document, bson1);
-                player.sendMessage(Language.getAndReplace("requests-allowed"));
+                player.sendMessage(Language.get("requests-allowed"));
             }
         });
     }
@@ -173,12 +177,12 @@ public class MongoDBProvider extends Provider {
                 Bson bson = new Document("notifications", false);
                 Bson bson1 = new Document("$set", bson);
                 settingsCollection.updateOne(document, bson1);
-                player.sendMessage(Language.getAndReplace("notifications-denied"));
+                player.sendMessage(Language.get("notifications-denied"));
             } else {
                 Bson bson = new Document("notifications", true);
                 Bson bson1 = new Document("$set", bson);
                 settingsCollection.updateOne(document, bson1);
-                player.sendMessage(Language.getAndReplace("notifications-allowed"));
+                player.sendMessage(Language.get("notifications-allowed"));
             }
         });
     }

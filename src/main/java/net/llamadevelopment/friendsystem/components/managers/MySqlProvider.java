@@ -73,6 +73,8 @@ public class MySqlProvider extends Provider {
             preparedStatement.setString(1, player);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) return true;
+            rs.close();
+            preparedStatement.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -100,6 +102,7 @@ public class MySqlProvider extends Provider {
             preparedStatement1.setString(1, rid);
             preparedStatement1.executeUpdate();
             preparedStatement1.close();
+            rs.close();
             preparedStatement.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,6 +134,8 @@ public class MySqlProvider extends Provider {
             preparedStatement1.close();
             preparedStatement2.close();
             preparedStatement3.close();
+            rs.close();
+            rs1.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -148,6 +153,7 @@ public class MySqlProvider extends Provider {
             preparedStatement.setString(1, playeruid);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) if (rs.getString("PUID").equalsIgnoreCase(targetuid)) rid = rs.getString("RID");
+            rs.close();
             preparedStatement.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -169,6 +175,8 @@ public class MySqlProvider extends Provider {
             preparedStatement.setString(1, player);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) return rs.getString("UID");
+            rs.close();
+            preparedStatement.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -182,6 +190,8 @@ public class MySqlProvider extends Provider {
             preparedStatement.setString(1, uid);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) return rs.getString("PLAYER");
+            rs.close();
+            preparedStatement.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -197,6 +207,7 @@ public class MySqlProvider extends Provider {
             preparedStatement.setString(1, playeruid);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) return rs.getString("TUID").equalsIgnoreCase(targetuid);
+            rs.close();
             preparedStatement.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -213,6 +224,7 @@ public class MySqlProvider extends Provider {
             preparedStatement.setString(1, targetuid);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) return rs.getString("PUID").equalsIgnoreCase(playeruid);
+            rs.close();
             preparedStatement.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -229,12 +241,13 @@ public class MySqlProvider extends Provider {
             if (rs.next()) {
                 if (rs.getBoolean("REQUESTS")) {
                     update("UPDATE settings SET REQUESTS= '" + false + "' WHERE PLAYER= '" + player.getName() + "';");
-                    player.sendMessage(Language.getAndReplace("requests-denied"));
+                    player.sendMessage(Language.get("requests-denied"));
                 } else {
                     update("UPDATE settings SET REQUESTS= '" + true + "' WHERE PLAYER= '" + player.getName() + "';");
-                    player.sendMessage(Language.getAndReplace("requests-allowed"));
+                    player.sendMessage(Language.get("requests-allowed"));
                 }
             }
+            rs.close();
             preparedStatement.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -250,12 +263,13 @@ public class MySqlProvider extends Provider {
             if (rs.next()) {
                 if (rs.getBoolean("NOTIFICATIONS")) {
                     update("UPDATE settings SET NOTIFICATIONS= '" + false + "' WHERE PLAYER= '" + player.getName() + "';");
-                    player.sendMessage(Language.getAndReplace("notifications-denied"));
+                    player.sendMessage(Language.get("notifications-denied"));
                 } else {
                     update("UPDATE settings SET NOTIFICATIONS= '" + true + "' WHERE PLAYER= '" + player.getName() + "';");
-                    player.sendMessage(Language.getAndReplace("notifications-allowed"));
+                    player.sendMessage(Language.get("notifications-allowed"));
                 }
             }
+            rs.close();
             preparedStatement.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -274,6 +288,7 @@ public class MySqlProvider extends Provider {
                 r = rs.getBoolean("REQUESTS");
                 n = rs.getBoolean("NOTIFICATIONS");
             }
+            rs.close();
             preparedStatement.close();
         } catch (Exception e) {
             e.printStackTrace();

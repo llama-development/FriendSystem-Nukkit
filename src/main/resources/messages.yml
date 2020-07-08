@@ -1,4 +1,3 @@
-#Standard ui icons made by Smashicons from www.flaticon.com
 # - - - System messages - - -
 
 prefix: "&8» &gFriend &8| &7"
@@ -23,9 +22,12 @@ friend-joined: "&e[0] &ais now online."
 friend-left: "&e[0] &cis now offline."
 friend-removed: "&e[0] &ais no longer your friend."
 friend-removed-other: "&e[0] &cis no longer your friend."
+friend-not-online: "&e[0] &cis not online."
 join-info: "&7There are &e[0] &7friends online."
 online: "&aOnline"
 offline: "&cOffline"
+msg-received: "&aMessage from &e[0]&a: &7[1]"
+msg-sent: "&aMessage to &e[0]&a: &7[1]"
 
 # - - - Form UI - - -
 
@@ -34,13 +36,10 @@ back: "&8» &cBack"
 friend-menu-title: "Friend menu"
 friend-menu-content: ""
 friend-menu-addfriend: "&8» &aAdd friend"
-friend-menu-addfriend-image: "https://image.flaticon.com/icons/png/512/148/148764.png"
 friend-menu-requests: "&8» &eFriend requests &8[0]"
-friend-menu-requests-image: "https://image.flaticon.com/icons/png/512/148/148966.png"
 friend-menu-friendlist: "&8» &6Friend list &8[0]"
-friend-menu-friendlist-image: "https://image.flaticon.com/icons/png/512/149/149066.png"
 friend-menu-settings: "&8» &cSettings"
-friend-menu-settings-image: "https://image.flaticon.com/icons/png/512/148/148909.png"
+friend-menu-message: "&8» &bMessage"
 
 friend-add-title: "Add a friend"
 friend-add-content: "Provide the username of your friend."
@@ -62,8 +61,11 @@ friend-list-menu-button: "&8» &e[0]\n[1]"
 friend-friend-menu-title: "Friend options"
 friend-friend-menu-content: "Name: &e[0]"
 friend-friend-remove: "&8» &cRemove friend"
-friend-friend-remove-image: "https://image.flaticon.com/icons/png/512/148/148766.png"
 
 friend-settings-menu-title: "Settings"
 friend-settings-menu-request: "Toggle friend requests."
 friend-settings-menu-notification: "Toggle friend notifications."
+
+friend-message-title: "Message"
+friend-message-select: "Select a friend."
+friend-message-message: "Specify a message you want to send to your friend."
