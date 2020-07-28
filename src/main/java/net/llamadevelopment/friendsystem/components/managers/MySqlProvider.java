@@ -19,7 +19,7 @@ public class MySqlProvider extends Provider {
     public void connect(FriendSystem server) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://" + server.getConfig().getString("MySql.Host") + ":" + server.getConfig().getString("MySql.Port") + "/" + server.getConfig().getString("MySql.Database") + "?autoReconnect=true", server.getConfig().getString("MySql.User"), server.getConfig().getString("MySql.Password"));
+            connection = DriverManager.getConnection("jdbc:mysql://" + server.getConfig().getString("MySql.Host") + ":" + server.getConfig().getString("MySql.Port") + "/" + server.getConfig().getString("MySql.Database") + "?autoReconnect=true&useGmtMillisForDatetimes=true&serverTimezone=GMT", server.getConfig().getString("MySql.User"), server.getConfig().getString("MySql.Password"));
             update("CREATE TABLE IF NOT EXISTS users(player VARCHAR(255), uid VARCHAR(255), PRIMARY KEY (uid));");
             update("CREATE TABLE IF NOT EXISTS friends(fid VARCHAR(255), puid VARCHAR(255), tuid VARCHAR(255));");
             update("CREATE TABLE IF NOT EXISTS settings(player VARCHAR(255), notifications VARCHAR(255), requests VARCHAR(255), PRIMARY KEY (player));");
