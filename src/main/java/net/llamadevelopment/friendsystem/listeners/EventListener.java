@@ -32,7 +32,10 @@ public class EventListener implements Listener {
                 }
             }
         }
+        
+        if (e == 0) return;
         final int finalE = e;
+        
         instance.getServer().getScheduler().scheduleDelayedTask(instance, () -> {
             if (settings1.isNotification()) {
                 event.getPlayer().sendMessage(Language.get("join-info", String.valueOf(finalE)));
