@@ -45,7 +45,7 @@ public class FriendSystem extends PluginBase {
             getLogger().info("§aFriendSystem successfully started.");
         } catch (Exception e) {
             e.printStackTrace();
-            getLogger().error("§4Failed to load BanSystem.");
+            getLogger().error("§4Failed to load FriendSystem.");
         }
 
     }
