@@ -1,5 +1,5 @@
 # FriendSystem-Nukkit
-Download: https://nukkitx.com/resources/friendsystem.398/
+Download: https://cloudburstmc.org/resources/friendsystem.398/
 
 # Thanks to ZAP-Hosting!
 This project wouldn't be possible without the help of ZAP-Hosting!
