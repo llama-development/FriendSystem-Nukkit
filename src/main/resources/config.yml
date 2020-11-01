@@ -1,13 +1,18 @@
 Provider: Yaml
+
 MySql:
   Host: "127.0.0.1"
   Port: "3306"
   Database: "friendsystem"
   User: "root"
   Password: "learn_the_basics"
+
 MongoDB:
-  Uri: ""
+  Uri: "URI_LINK"
   Database: "friendsystem"
 
 Commands:
-  Friend: "friend"
+  Friend:
+    Name: "friend"
+    Description: "Friend menu"
+    Aliases: ["f", "fmenu"]

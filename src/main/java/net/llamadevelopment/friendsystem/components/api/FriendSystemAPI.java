@@ -5,13 +5,14 @@ import cn.nukkit.level.Sound;
 import cn.nukkit.network.protocol.PlaySoundPacket;
 import lombok.Getter;
 import lombok.Setter;
-import net.llamadevelopment.friendsystem.components.managers.database.Provider;
+import net.llamadevelopment.friendsystem.components.provider.Provider;
 
 import java.util.Random;
 
 public class FriendSystemAPI {
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private static Provider provider;
 
     public static String getRandomID() {

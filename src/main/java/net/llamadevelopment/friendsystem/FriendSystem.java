@@ -3,14 +3,15 @@ package net.llamadevelopment.friendsystem;
 import cn.nukkit.command.CommandMap;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
+import lombok.Getter;
 import net.llamadevelopment.friendsystem.commands.FriendCommand;
 import net.llamadevelopment.friendsystem.components.api.FriendSystemAPI;
 import net.llamadevelopment.friendsystem.components.forms.FormListener;
 import net.llamadevelopment.friendsystem.components.language.Language;
-import net.llamadevelopment.friendsystem.components.managers.MongoDBProvider;
-import net.llamadevelopment.friendsystem.components.managers.MySqlProvider;
-import net.llamadevelopment.friendsystem.components.managers.YamlProvider;
-import net.llamadevelopment.friendsystem.components.managers.database.Provider;
+import net.llamadevelopment.friendsystem.components.provider.MongoDBProvider;
+import net.llamadevelopment.friendsystem.components.provider.MySqlProvider;
+import net.llamadevelopment.friendsystem.components.provider.YamlProvider;
+import net.llamadevelopment.friendsystem.components.provider.Provider;
 import net.llamadevelopment.friendsystem.listeners.EventListener;
 
 import java.util.HashMap;
@@ -18,42 +19,43 @@ import java.util.Map;
 
 public class FriendSystem extends PluginBase {
 
-    private static FriendSystem instance;
     public static Provider provider;
     private static final Map<String, Provider> providers = new HashMap<>();
+
+    @Getter
+    private static FriendSystem instance;
 
     @Override
     public void onEnable() {
         instance = this;
         try {
-            saveDefaultConfig();
-            registerProvider(new MongoDBProvider());
-            registerProvider(new MySqlProvider());
-            registerProvider(new YamlProvider());
-            if (!providers.containsKey(getConfig().getString("Provider"))) {
-                getLogger().error("§4Please specify a valid provider: Yaml, MySql, MongoDB");
+            this.saveDefaultConfig();
+            this.registerProvider(new MongoDBProvider());
+            this.registerProvider(new MySqlProvider());
+            this.registerProvider(new YamlProvider());
+            if (!providers.containsKey(this.getConfig().getString("Provider"))) {
+                this.getLogger().error("§4Please specify a valid provider: Yaml, MySql, MongoDB");
                 return;
             }
-            provider = providers.get(getConfig().getString("Provider"));
+            provider = providers.get(this.getConfig().getString("Provider"));
             provider.connect(this);
-            getLogger().info("§aSuccessfully loaded " + provider.getProvider() + " provider.");
+            this.getLogger().info("§aSuccessfully loaded " + provider.getProvider() + " provider.");
             FriendSystemAPI.setProvider(provider);
             Language.init();
-            registerCommands();
-            getServer().getPluginManager().registerEvents(new EventListener(), this);
-            getServer().getPluginManager().registerEvents(new FormListener(), this);
-            getLogger().info("§aFriendSystem successfully started.");
+            this.registerCommands();
+            this.getServer().getPluginManager().registerEvents(new EventListener(), this);
+            this.getServer().getPluginManager().registerEvents(new FormListener(), this);
+            this.getLogger().info("§aFriendSystem successfully started.");
         } catch (Exception e) {
             e.printStackTrace();
-            getLogger().error("§4Failed to load BanSystem.");
+            this.getLogger().error("§4Failed to load FriendSystem.");
         }
-
     }
 
     private void registerCommands() {
-        Config config = getConfig();
-        CommandMap map = getServer().getCommandMap();
-        map.register(config.getString("Commands.Friend"), new FriendCommand(config.getString("Commands.Friend")));
+        Config config = this.getConfig();
+        CommandMap map = this.getServer().getCommandMap();
+        map.register(config.getString("Commands.Friend"), new FriendCommand(this));
     }
 
     @Override
@@ -63,10 +65,6 @@ public class FriendSystem extends PluginBase {
 
     private void registerProvider(Provider provider) {
         providers.put(provider.getProvider(), provider);
-    }
-
-    public static FriendSystem getInstance() {
-        return instance;
     }
 
 }

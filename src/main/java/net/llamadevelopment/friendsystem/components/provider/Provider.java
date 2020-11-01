@@ -1,15 +1,13 @@
-package net.llamadevelopment.friendsystem.components.managers.database;
+package net.llamadevelopment.friendsystem.components.provider;
 
 import cn.nukkit.Player;
 import net.llamadevelopment.friendsystem.FriendSystem;
 import net.llamadevelopment.friendsystem.components.data.PlayerSettings;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class Provider {
-
-    public static HashMap<String, PlayerSettings> playerSettings = new HashMap<>();
 
     public void connect(FriendSystem server) {
 
@@ -23,8 +21,8 @@ public class Provider {
 
     }
 
-    public boolean userExists(String player) {
-        return false;
+    public void userExists(String player, Consumer<Boolean> exists) {
+
     }
 
     public void createFriendRequest(String player, String target) {
@@ -43,20 +41,20 @@ public class Provider {
 
     }
 
-    public String convertToID(String player) {
-        return null;
+    public void convertToID(String player, Consumer<String> consumer) {
+
     }
 
-    public String convertToName(String uid) {
-        return null;
+    public void convertToName(String uid, Consumer<String> consumer) {
+
     }
 
-    public boolean areFriends(String player, String target) {
-        return false;
+    public void areFriends(String player, String target, Consumer<Boolean> areFriends) {
+
     }
 
-    public boolean requestExists(String player, String target) {
-        return false;
+    public void requestExists(String player, String target, Consumer<Boolean> exists) {
+
     }
 
     public void toggleRequest(Player player) {
@@ -67,16 +65,16 @@ public class Provider {
 
     }
 
-    public PlayerSettings getFriendData(String player) {
-        return null;
+    public void getFriendData(String player, Consumer<PlayerSettings> playerSettings) {
+
     }
 
-    public List<String> getFriends(String player) {
-        return null;
+    public void getFriends(String player, Consumer<List<String>> friends) {
+
     }
 
-    public List<String> getRequests(String player) {
-        return null;
+    public void getRequests(String player, Consumer<List<String>> requests) {
+
     }
 
     public String getProvider() {

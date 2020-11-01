@@ -1,14 +1,17 @@
 package net.llamadevelopment.friendsystem.commands;
 
 import cn.nukkit.Player;
-import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.command.PluginCommand;
+import net.llamadevelopment.friendsystem.FriendSystem;
 import net.llamadevelopment.friendsystem.components.forms.FormWindows;
 
-public class FriendCommand extends Command {
+public class FriendCommand extends PluginCommand<FriendSystem> {
 
-    public FriendCommand(String name) {
-        super(name, "Friend menu");
+    public FriendCommand(FriendSystem owner) {
+        super(owner.getConfig().getString("Commands.Friend.Name"), owner);
+        this.setDescription(owner.getConfig().getString("Commands.Friend.Description"));
+        this.setAliases(owner.getConfig().getStringList("Commands.Friend.Aliases").toArray(new String[]{}));
     }
 
     @Override
@@ -19,4 +22,5 @@ public class FriendCommand extends Command {
         }
         return false;
     }
+
 }
